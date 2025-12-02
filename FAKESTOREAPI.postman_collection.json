@@ -1,0 +1,132 @@
+{
+	"info": {
+		"_postman_id": "48d171e9-70a5-4206-8722-4b689b595b2d",
+		"name": "FAKESTOREAPI",
+		"description": "Overview\nThis collection demonstrates a simple end-to-end workflow using the public reqres.in sample API: fetch a list of resources, create a user, and update that user. It’s intended for practicing basic HTTP operations in Postman.\n\nBase URL\n- https://reqres.in\n- Recommended variable: {{baseUrl}} (default: https://reqres.in)\n  • Define {{baseUrl}} in an environment to easily switch hosts if needed.\n\nAuthentication\n- None required. reqres.in is a public demo API and does not need authentication.\n\nEnvironments & Variables\n- Create an environment (e.g., \"Reqres Demo\") and add: baseUrl = https://reqres.in\n- Optional runtime variables captured during the flow: userId, createdAt, updatedAt.\n- Reference URLs as {{baseUrl}}/api/... so you can reuse or change the base in one place.\n\nRequests in this collection\n1) List resources — GET /api/unknown\n   - Purpose: Retrieve a list of “unknown” resources (a sample dataset provided by reqres.in).\n   - Required params: none\n   - Optional query params: page (number) — paginates results (e.g., ?page=2)\n   - Expected 200 OK response body:\n     {\n       \"page\": 1,\n       \"per_page\": 6,\n       \"total\": 12,\n       \"total_pages\": 2,\n       \"data\": [ { \"id\": 1, \"name\": \"cerulean\", \"year\": 2000 } ]\n     }\n   - Common errors: 404 Not Found (for non-existent routes)\n\n2) Create user — POST /api/users\n   - Purpose: Create a new user (demo only; data is not persisted).\n   - Required JSON body:\n     {\n       \"name\": \"morpheus\",\n       \"job\": \"leader\"\n     }\n   - Expected 201 Created response body includes id and createdAt:\n     {\n       \"name\": \"morpheus\",\n       \"job\": \"leader\",\n       \"id\": \"123\",\n       \"createdAt\": \"2025-01-01T00:00:00.000Z\"\n     }\n   - Common errors: 400 Bad Request (malformed JSON)\n\n3) Replace user — PUT /api/users/:id\n   - Purpose: Replace an existing user’s details (demo behavior; changes are echoed back).\n   - Required path param: id (e.g., 2)\n   - Typical JSON body (optional for demo API but recommended):\n     {\n       \"name\": \"morpheus\",\n       \"job\": \"zion resident\"\n     }\n   - Expected 200 OK response body includes updatedAt.\n\n4) Update user — PATCH /api/users/:id\n   - Purpose: Partially update an existing user (demo behavior; changes are echoed back).\n   - Required path param: id (e.g., 2)\n   - Typical JSON body:\n     {\n       \"job\": \"rebel leader\"\n     }\n   - Expected 200 OK response body includes updatedAt.\n\nExample usage snippets\n- cURL\n  # List resources\n  curl --request GET \"{{baseUrl}}/api/unknown\" -H \"Accept: application/json\"\n\n  # Create user\n  curl --request POST \"{{baseUrl}}/api/users\" \\\n    -H \"Content-Type: application/json\" \\\n    --data '{\"name\":\"morpheus\",\"job\":\"leader\"}'\n\n  # Replace user\n  curl --request PUT \"{{baseUrl}}/api/users/2\" \\\n    -H \"Content-Type: application/json\" \\\n    --data '{\"name\":\"morpheus\",\"job\":\"zion resident\"}'\n\n  # Update user\n  curl --request PATCH \"{{baseUrl}}/api/users/2\" \\\n    -H \"Content-Type: application/json\" \\\n    --data '{\"job\":\"rebel leader\"}'\n\nNotes\n- This is a demo API: data is not persisted.\n- You can run the collection with the Collection Runner or a Monitor to see all steps end-to-end.\n",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "45065162",
+		"_collection_link": "https://mahade-3452131.postman.co/workspace/Usage-API~6e14b422-9c5e-4020-8f68-3be03eb210d0/collection/45065162-48d171e9-70a5-4206-8722-4b689b595b2d?action=share&source=collection_link&creator=45065162"
+	},
+	"item": [
+		{
+			"name": "GET ALL PRODUCTS",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://fakestoreapi.com/products",
+					"protocol": "https",
+					"host": [
+						"fakestoreapi",
+						"com"
+					],
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Product By Id",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://fakestoreapi.com/products/12",
+					"protocol": "https",
+					"host": [
+						"fakestoreapi",
+						"com"
+					],
+					"path": [
+						"products",
+						"12"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST for adding new product",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"title\": \"string\",\r\n  \"price\": 0.1,\r\n  \"description\": \"string\",\r\n  \"category\": \"string\",\r\n  \"image\": \"http://example.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://fakestoreapi.com/products",
+					"protocol": "https",
+					"host": [
+						"fakestoreapi",
+						"com"
+					],
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE PRODUCT INFO",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"title\": \"Mahade's Shop\",\r\n  \"price\": 100000000,\r\n  \"description\": \"Character\",\r\n  \"category\": \"Character\",\r\n  \"image\": \"http://mahadebusiness.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://fakestoreapi.com/products/7",
+					"protocol": "https",
+					"host": [
+						"fakestoreapi",
+						"com"
+					],
+					"path": [
+						"products",
+						"7"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
